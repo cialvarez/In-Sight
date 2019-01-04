@@ -19,9 +19,11 @@
 		831A215121DF554100E8822D /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831A214F21DF554100E8822D /* ImageCell.swift */; };
 		831A215221DF554100E8822D /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831A215021DF554100E8822D /* ImageCell.xib */; };
 		831A215421DF555700E8822D /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831A215321DF555700E8822D /* GalleryViewController.swift */; };
+		F54518CFC6BF18CD0D92E3E8 /* Pods_In_Sight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95195A74D26C006CC6B585AE /* Pods_In_Sight.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09EB277B61C0CB37301688FE /* Pods-In Sight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-In Sight.release.xcconfig"; path = "Pods/Target Support Files/Pods-In Sight/Pods-In Sight.release.xcconfig"; sourceTree = "<group>"; };
 		831A212721DE556D00E8822D /* In Sight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "In Sight.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		831A212A21DE556D00E8822D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		831A212C21DE556D00E8822D /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +38,8 @@
 		831A214F21DF554100E8822D /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		831A215021DF554100E8822D /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
 		831A215321DF555700E8822D /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		8B805CCAE0E77FC7B42749F9 /* Pods-In Sight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-In Sight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-In Sight/Pods-In Sight.debug.xcconfig"; sourceTree = "<group>"; };
+		95195A74D26C006CC6B585AE /* Pods_In_Sight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_In_Sight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,17 +47,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F54518CFC6BF18CD0D92E3E8 /* Pods_In_Sight.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		760C68FCB6C6417A4E513C84 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8B805CCAE0E77FC7B42749F9 /* Pods-In Sight.debug.xcconfig */,
+				09EB277B61C0CB37301688FE /* Pods-In Sight.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		831A211E21DE556D00E8822D = {
 			isa = PBXGroup;
 			children = (
 				831A212921DE556D00E8822D /* In Sight */,
 				831A212821DE556D00E8822D /* Products */,
+				760C68FCB6C6417A4E513C84 /* Pods */,
+				90AF4170E280FB686492E9E3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,6 +189,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		90AF4170E280FB686492E9E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				95195A74D26C006CC6B585AE /* Pods_In_Sight.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -180,9 +204,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 831A213B21DE557500E8822D /* Build configuration list for PBXNativeTarget "In Sight" */;
 			buildPhases = (
+				0278ED85958076F6194CAB4C /* [CP] Check Pods Manifest.lock */,
 				831A212321DE556D00E8822D /* Sources */,
 				831A212421DE556D00E8822D /* Frameworks */,
 				831A212521DE556D00E8822D /* Resources */,
+				945F5F73D277726C33A547B2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -242,6 +268,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0278ED85958076F6194CAB4C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-In Sight-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		945F5F73D277726C33A547B2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-In Sight/Pods-In Sight-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-In Sight/Pods-In Sight-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		831A212321DE556D00E8822D /* Sources */ = {
@@ -396,6 +463,7 @@
 		};
 		831A213C21DE557500E8822D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B805CCAE0E77FC7B42749F9 /* Pods-In Sight.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -414,6 +482,7 @@
 		};
 		831A213D21DE557500E8822D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09EB277B61C0CB37301688FE /* Pods-In Sight.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
