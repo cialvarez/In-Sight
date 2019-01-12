@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="LCc-W7-u0Z"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Browse" image="app_search_24" id="yn5-0u-LsQ"/>
+                    <tabBarItem key="tabBarItem" title="Browse" image="app_menu_featured" id="yn5-0u-LsQ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVx-8e-Bfa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -28,6 +28,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="app_search_24" width="48" height="48"/>
+        <image name="app_menu_featured" width="48" height="48"/>
     </resources>
 </document>

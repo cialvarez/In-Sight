@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="hM0-dx-Cao"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="app_menu_saved" id="2OB-M2-xRv"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="app_menu_favorites" id="2OB-M2-xRv"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4U-cC-pIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -28,6 +28,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="app_menu_saved" width="48" height="48"/>
+        <image name="app_menu_favorites" width="48" height="48"/>
     </resources>
 </document>

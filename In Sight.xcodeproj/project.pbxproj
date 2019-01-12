@@ -138,7 +138,6 @@
 				831B0E8D21E107E4006B4C32 /* Enumerators */,
 				831B0E8921E1070D006B4C32 /* Helpers */,
 				831A214221DE55C300E8822D /* Models */,
-				831A214121DE55AF00E8822D /* Views */,
 				831A213F21DE558F00E8822D /* Networking */,
 				831A213E21DE558600E8822D /* Controllers */,
 				831A214021DE559A00E8822D /* Extensions */,
@@ -178,13 +177,6 @@
 				831B0E9921E23ACC006B4C32 /* Dictionaries */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		831A214121DE55AF00E8822D /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		831A214221DE55C300E8822D /* Models */ = {
@@ -495,7 +487,7 @@
 				"$TEMP_DIR/rswift-lastrun",
 			);
 			outputPaths = (
-				$SRCROOT/R.generated.swift,
+				"$SRCROOT/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

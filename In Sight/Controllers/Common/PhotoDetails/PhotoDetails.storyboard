@@ -30,17 +30,31 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fOQ-uc-bzW">
-                                        <rect key="frame" x="321" y="13" width="24" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="u9e-AX-eGe"/>
-                                            <constraint firstAttribute="width" constant="24" id="v9P-c7-Ci4"/>
-                                        </constraints>
-                                        <state key="normal" image="saved_48pt"/>
-                                        <connections>
-                                            <action selector="saveButtonTapped:" destination="tED-Mh-dmU" eventType="touchUpInside" id="eAK-fT-oVz"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Yg2-xo-MIF">
+                                        <rect key="frame" x="295" y="15" width="50" height="20"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4I-ku-1z1">
+                                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="20" id="7xf-qf-6Q3"/>
+                                                    <constraint firstAttribute="height" constant="20" id="ieN-WF-pet"/>
+                                                </constraints>
+                                                <connections>
+                                                    <action selector="downloadButtonTapped:" destination="tED-Mh-dmU" eventType="touchUpInside" id="iiA-fD-dS0"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fOQ-uc-bzW">
+                                                <rect key="frame" x="30" y="0.0" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="u9e-AX-eGe"/>
+                                                    <constraint firstAttribute="width" constant="20" id="v9P-c7-Ci4"/>
+                                                </constraints>
+                                                <connections>
+                                                    <action selector="saveButtonTapped:" destination="tED-Mh-dmU" eventType="touchUpInside" id="eAK-fT-oVz"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -59,6 +73,7 @@
                     </view>
                     <connections>
                         <outlet property="authorLabel" destination="xXH-Y6-70I" id="1UD-Si-yro"/>
+                        <outlet property="downloadButton" destination="E4I-ku-1z1" id="BMQ-q3-nj4"/>
                         <outlet property="photoImageView" destination="L1F-xh-gfk" id="kbj-Mo-ceQ"/>
                         <outlet property="saveButton" destination="fOQ-uc-bzW" id="td6-cL-pbp"/>
                     </connections>
@@ -68,7 +83,4 @@
             <point key="canvasLocation" x="48.799999999999997" y="34.632683658170919"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="saved_48pt" width="36.378948211669922" height="36.378948211669922"/>
-    </resources>
 </document>
