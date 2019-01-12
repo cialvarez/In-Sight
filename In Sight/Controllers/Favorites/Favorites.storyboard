@@ -13,14 +13,14 @@
         <!--Favorites-->
         <scene sceneID="RTE-a9-6l3">
             <objects>
-                <viewController title="Favorites" id="Dhm-0x-ba6" sceneMemberID="viewController">
+                <viewController title="Favorites" id="Dhm-0x-ba6" customClass="FavoritesViewController" customModule="In_Sight" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GGp-TC-bWf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.030363539964340269" green="0.22533862513948966" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="hM0-dx-Cao"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="2OB-M2-xRv"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="app_menu_saved" id="2OB-M2-xRv"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4U-cC-pIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -28,4 +28,7 @@
             <point key="canvasLocation" x="158" y="172"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="app_menu_saved" width="48" height="48"/>
+    </resources>
 </document>

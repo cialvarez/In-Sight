@@ -7,83 +7,175 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireObjectMapper
 
-private let reuseIdentifier = "Cell"
+let reuseIdentifier = R.reuseIdentifier.imageCell.identifier
 
-class GalleryViewController: UICollectionViewController {
+enum GalleryType {
+    case favorites
+    case featured
+}
 
+class GalleryViewController: UIViewController {
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    var photoListOptions: UnsplashPhotoListOptions?
+    var photoSearchOptions: UnsplashPhotoSearchOptions?
+    var photoSearchResultCount = 0
+    var photos = [UnsplashPhotoList]()
+    var isLoadingPhotos = false
+    let searchController = UISearchController(searchResultsController: nil)
+    var galleryType = GalleryType.featured
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        if let layout = collectionView.collectionViewLayout as? PhotoGridLayout {
+            layout.delegate = self
+        }
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView.register(UINib(resource: R.nib.imageCell),
+                                     forCellWithReuseIdentifier: reuseIdentifier)
+        
+        // Setup the Search Controller
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Find Photos"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        // Setup the Scope Bar
+        searchController.searchBar.delegate = self
 
-        // Do any additional setup after loading the view.
+        if galleryType == .featured {
+            photoListOptions = UnsplashPhotoListOptions()
+            callPhotoListAPI()
+        }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
-        // Configure the cell
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if galleryType == .favorites {
+            photos = Saved.allStoredData().compactMap({$0.photo})
+        }
+        collectionView.reloadData()
+    }
     
-        return cell
+    func clearPhotos() {
+        photos =  [UnsplashPhotoList]()
+        collectionView.reloadData()
+        collectionView.collectionViewLayout.invalidateLayout()
     }
+}
 
-    // MARK: UICollectionViewDelegate
+// MARK: Layout Delegate
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+extension GalleryViewController: PhotoGridLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        heightForPhotoAtIndexPath indexPath:IndexPath) -> CGFloat {
+        guard photos.count > indexPath.row else {
+            return 0
+        }
+        
+        let currentPhoto = photos[indexPath.row]
+        let cellWidth = (collectionView.bounds.width / 2) - 20
+        
+        return (currentPhoto.height / currentPhoto.width) * cellWidth
     }
-    */
+}
 
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
+// MARK: Network Requests
+
+extension GalleryViewController {
+
+    func callPhotoSearchAPI() {
+        guard let photoSearchOptions = photoSearchOptions,
+            !isLoadingPhotos else {
+                return
+        }
+        let isNewList = photoSearchOptions.page == 1
+        if isNewList {
+            clearPhotos()
+        }
+        isLoadingPhotos = true
+        Alamofire.request(UnsplashPhotoSearchRequest(options: photoSearchOptions))
+            .responseObject { [weak self] (response: DataResponse<UnsplashPhotoSearchResponse>) in
+                switch response.result {
+                case .success(let response):
+                    self?.photos += response.results
+                    self?.photoSearchResultCount = response.total
+                case .failure(let error):
+                    print(error)
+                }
+                self?.isLoadingPhotos = false
+                self?.collectionView.reloadData()
+                self?.collectionView.collectionViewLayout.invalidateLayout()
+        }
     }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
+    func callPhotoListAPI() {
+        guard galleryType == .featured else {
+            collectionView.reloadData()
+            return
+        }
+        
+        guard let photoListOptions = photoListOptions,
+            !isLoadingPhotos else {
+            return
+        }
+        let isNewList = photoListOptions.page == 1
+        if isNewList {
+            clearPhotos()
+        }
+        
+        isLoadingPhotos = true
+        Alamofire.request(UnsplashPhotoListRequest(options: photoListOptions))
+            .responseArray { [weak self] (response: DataResponse<[UnsplashPhotoList]>) in
+                switch response.result {
+                case .success(let photoList):
+                    self?.photos += photoList
+                case .failure(let error):
+                    print(error)
+                }
+                self?.isLoadingPhotos = false
+                self?.collectionView.reloadData()
+                self?.collectionView.collectionViewLayout.invalidateLayout()
+        }
     }
-    */
+}
 
+// MARK: - UISearchBar Delegate
+
+extension GalleryViewController: UISearchBarDelegate {
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        photoSearchOptions = nil
+        if photoListOptions == nil {
+            photoListOptions = UnsplashPhotoListOptions()
+        }
+        callPhotoListAPI()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        photoListOptions = nil
+        if photoSearchOptions == nil {
+            photoSearchOptions = UnsplashPhotoSearchOptions(query: searchBar.text ?? "")
+        }
+        photoSearchOptions?.page = 1
+        callPhotoSearchAPI()
+    }
+}
+
+extension GalleryViewController {
+    
+    static func generateFromStoryboard(galleryType: GalleryType = .featured) -> UIViewController {
+        guard let navigationVC = R.storyboard.gallery().instantiateInitialViewController() as? UINavigationController,
+            let galleryVC = navigationVC.visibleViewController as? GalleryViewController else {
+                assertionFailure()
+                return UINavigationController(rootViewController: UIViewController())
+        }
+        
+        galleryVC.galleryType = galleryType
+        
+        return navigationVC
+    }
 }

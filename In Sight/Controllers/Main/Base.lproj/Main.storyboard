@@ -17,11 +17,11 @@
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="Z3S-Fn-nMn" kind="relationship" relationship="viewControllers" id="BGn-4D-xGI"/>
                         <segue destination="kep-4N-3oA" kind="relationship" relationship="viewControllers" id="UDF-aK-rET"/>
-                        <segue destination="P27-vw-q6O" kind="relationship" relationship="viewControllers" id="LGt-pD-MUf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -37,16 +37,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0N3-C1-vS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="512" y="18"/>
-        </scene>
-        <!--Gallery-->
-        <scene sceneID="oR3-Gr-v5b">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Gallery" id="P27-vw-q6O" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Nsk-wW-GSy"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="P5c-bJ-nhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="457" y="-251"/>
         </scene>
         <!--Featured-->
         <scene sceneID="Vgr-Gi-adm">

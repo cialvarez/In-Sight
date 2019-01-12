@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tED-Mh-dmU">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Photo Details View Controller-->
+        <scene sceneID="qcv-Sa-9hH">
+            <objects>
+                <viewController id="tED-Mh-dmU" customClass="PhotoDetailsViewController" customModule="In_Sight" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JOM-uE-e4b">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L1F-xh-gfk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gBV-j7-Nea">
+                                <rect key="frame" x="15" y="617" width="345" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXH-Y6-70I">
+                                        <rect key="frame" x="0.0" y="19" width="32.5" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fOQ-uc-bzW">
+                                        <rect key="frame" x="321" y="13" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="u9e-AX-eGe"/>
+                                            <constraint firstAttribute="width" constant="24" id="v9P-c7-Ci4"/>
+                                        </constraints>
+                                        <state key="normal" image="saved_48pt"/>
+                                        <connections>
+                                            <action selector="saveButtonTapped:" destination="tED-Mh-dmU" eventType="touchUpInside" id="eAK-fT-oVz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yqr-Ng-fKN" firstAttribute="bottom" secondItem="L1F-xh-gfk" secondAttribute="bottom" constant="50" id="07b-lm-dhH"/>
+                            <constraint firstItem="gBV-j7-Nea" firstAttribute="leading" secondItem="yqr-Ng-fKN" secondAttribute="leading" constant="15" id="3eY-i7-NpP"/>
+                            <constraint firstItem="L1F-xh-gfk" firstAttribute="top" secondItem="JOM-uE-e4b" secondAttribute="top" id="TER-Ta-BPl"/>
+                            <constraint firstItem="yqr-Ng-fKN" firstAttribute="trailing" secondItem="gBV-j7-Nea" secondAttribute="trailing" constant="15" id="WlJ-lX-7ii"/>
+                            <constraint firstItem="L1F-xh-gfk" firstAttribute="leading" secondItem="yqr-Ng-fKN" secondAttribute="leading" id="cu7-hh-ZjW"/>
+                            <constraint firstItem="yqr-Ng-fKN" firstAttribute="bottom" secondItem="gBV-j7-Nea" secondAttribute="bottom" id="g5f-L8-i8W"/>
+                            <constraint firstItem="gBV-j7-Nea" firstAttribute="top" secondItem="L1F-xh-gfk" secondAttribute="bottom" id="hRy-4g-jx8"/>
+                            <constraint firstItem="L1F-xh-gfk" firstAttribute="trailing" secondItem="yqr-Ng-fKN" secondAttribute="trailing" id="lOi-ey-7n5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="yqr-Ng-fKN"/>
+                    </view>
+                    <connections>
+                        <outlet property="authorLabel" destination="xXH-Y6-70I" id="1UD-Si-yro"/>
+                        <outlet property="photoImageView" destination="L1F-xh-gfk" id="kbj-Mo-ceQ"/>
+                        <outlet property="saveButton" destination="fOQ-uc-bzW" id="td6-cL-pbp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Gf-L6-xZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="48.799999999999997" y="34.632683658170919"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="saved_48pt" width="36.378948211669922" height="36.378948211669922"/>
+    </resources>
+</document>

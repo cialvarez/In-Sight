@@ -1,28 +1,45 @@
 PODS:
-  - Alamofire (5.0.0.beta.1)
+  - Alamofire (4.8.0)
+  - AlamofireObjectMapper (5.2.0):
+    - Alamofire (~> 4.7)
+    - ObjectMapper (~> 3.4)
+  - Kingfisher (5.0.1)
+  - ObjectMapper (3.4.2)
   - R.swift (5.0.0):
     - R.swift.Library (~> 5.0.0)
   - R.swift.Library (5.0.0)
+  - SwiftDate (5.0.13)
   - SwiftLint (0.29.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 5.0.0.beta.1)
+  - Alamofire (~> 4.7)
+  - AlamofireObjectMapper (~> 5.2)
+  - Kingfisher (~> 5.0)
   - R.swift
+  - SwiftDate
   - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - AlamofireObjectMapper
+    - Kingfisher
+    - ObjectMapper
     - R.swift
     - R.swift.Library
+    - SwiftDate
     - SwiftLint
 
 SPEC CHECKSUMS:
-  Alamofire: 2ef6d6c984c5d21c366e9b41a9ae7dfee2b67a44
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  AlamofireObjectMapper: 92b6ce2423a9d159e686f6a1d514a009bf903ddc
+  Kingfisher: 4f771421b9208185217550528a06fd48756cb7c2
+  ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   R.swift: f88c7d7d48a2be4dffa132dde1b3d389620310eb
   R.swift.Library: 0bf390e729bc10bb2c9e4fb78bd043164a7be4ff
+  SwiftDate: f4aea5fa9dee812485f34041121a4cbde01b0dee
   SwiftLint: 47df60bdea6e7e902b193b6596db8683aafd86a3
 
-PODFILE CHECKSUM: 48f53f1169fa28fe7d80f7013619791c69fb9709
+PODFILE CHECKSUM: e9b322444b28c0faca41d9344525308c15d41bc2
 
 COCOAPODS: 1.5.3
