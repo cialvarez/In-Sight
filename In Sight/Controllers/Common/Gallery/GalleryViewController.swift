@@ -66,8 +66,6 @@ class GalleryViewController: UIViewController {
         photos =  [UnsplashPhotoList]()
         collectionView.reloadData()
         collectionView.collectionViewLayout.invalidateLayout()
-        photoListOptions?.page = 1
-        photoSearchOptions?.page = 1
     }
     @objc private func refreshList() {
         isLoadingPhotos = false
@@ -97,23 +95,23 @@ extension GalleryViewController {
         guard !isLoadingPhotos else {
             return
         }
-        if var options = photoSearchOptions { // For keyword searches, call photo search API
+        if let options = photoSearchOptions { // For keyword searches, call photo search API
             guard shouldReset ||
                 photoSearchResultCount > photos.count else {
                 return
             }
 
             if shouldReset {
-                options.page = 1
+                photoSearchOptions?.page = 1
             } else {
-                options.page += 1
+                photoSearchOptions?.page += 1
             }
             callPhotoSearchAPI(options: options)
-        } else if var options = photoListOptions { // For popular photo searches, call photo list API
+        } else if let options = photoListOptions { // For popular photo searches, call photo list API
             if shouldReset {
-                options.page = 1
+                photoListOptions?.page = 1
             } else {
-                options.page += 1
+                photoListOptions?.page += 1
             }
             callPhotoListAPI(options: options)
         } else { // For favorites
