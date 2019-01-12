@@ -51,7 +51,6 @@ extension RequestBase {
         urlRequest.httpMethod = httpMethod.rawValue
         // set cache policy
         urlRequest.cachePolicy = cachePolicy
-        
         let bodyString = NSString(data: urlRequest.httpBody ?? Data(),
                                   encoding: String.Encoding.utf8.rawValue)
         print("[ Request URL ] = \(urlRequest.url?.absoluteString ?? "")")
