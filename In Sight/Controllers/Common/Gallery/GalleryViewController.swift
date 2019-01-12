@@ -38,7 +38,8 @@ class GalleryViewController: UIViewController {
         // Setup the Search Controller
         if galleryType == .featured {
             searchController.obscuresBackgroundDuringPresentation = false
-            searchController.searchBar.placeholder = "Find Photos"
+            searchController.searchBar.placeholder =
+                R.string.localizable.gallerySearchBarPlaceholder()
             navigationItem.searchController = searchController
             definesPresentationContext = true
             searchController.searchBar.enablesReturnKeyAutomatically = false
