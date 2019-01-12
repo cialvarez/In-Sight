@@ -95,24 +95,20 @@ extension GalleryViewController {
         guard !isLoadingPhotos else {
             return
         }
+        if shouldReset {
+            photoListOptions?.page = 1
+            photoSearchOptions?.page = 1
+        } else {
+            photoListOptions?.page += 1
+            photoSearchOptions?.page += 1
+        }
         if let options = photoSearchOptions { // For keyword searches, call photo search API
             guard shouldReset ||
                 photoSearchResultCount > photos.count else {
                 return
             }
-
-            if shouldReset {
-                photoSearchOptions?.page = 1
-            } else {
-                photoSearchOptions?.page += 1
-            }
             callPhotoSearchAPI(options: options)
         } else if let options = photoListOptions { // For popular photo searches, call photo list API
-            if shouldReset {
-                photoListOptions?.page = 1
-            } else {
-                photoListOptions?.page += 1
-            }
             callPhotoListAPI(options: options)
         } else { // For favorites
             collectionView.reloadData()
