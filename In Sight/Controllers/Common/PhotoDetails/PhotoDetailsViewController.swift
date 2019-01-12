@@ -77,6 +77,16 @@ class PhotoDetailsViewController: UIViewController {
             R.image.saved()?.withRenderingMode(.alwaysTemplate) :
             R.image.not_saved()?.withRenderingMode(.alwaysTemplate),
                             for: .normal)
+        saveButton.transform = CGAffineTransform(scaleX: 0, y: 0)
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 20,
+                       options: [],
+                       animations: { [weak self] in
+                        self?.saveButton.transform = CGAffineTransform.identity
+            },
+                       completion: nil)
         saveButton.tintColor = photoToSave.isSaved ? .red : .white
     }
     private func updateDownloadButton(success: Bool? = nil) {
