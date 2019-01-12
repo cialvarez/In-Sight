@@ -43,6 +43,7 @@
 		83780CDA21E6414500B65AEE /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83780CD921E6414500B65AEE /* FavoritesViewController.swift */; };
 		83780CDC21E653AD00B65AEE /* UnsplashAuthorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83780CDB21E653AD00B65AEE /* UnsplashAuthorInfo.swift */; };
 		83780CDF21E9E20B00B65AEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83780CDD21E9E20B00B65AEE /* Localizable.strings */; };
+		83780CE421E9ECDC00B65AEE /* ApiPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83780CE321E9ECDC00B65AEE /* ApiPaths.swift */; };
 		F54518CFC6BF18CD0D92E3E8 /* Pods_In_Sight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95195A74D26C006CC6B585AE /* Pods_In_Sight.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		83780CD921E6414500B65AEE /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		83780CDB21E653AD00B65AEE /* UnsplashAuthorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthorInfo.swift; sourceTree = "<group>"; };
 		83780CDE21E9E20B00B65AEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		83780CE321E9ECDC00B65AEE /* ApiPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiPaths.swift; sourceTree = "<group>"; };
 		8B805CCAE0E77FC7B42749F9 /* Pods-In Sight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-In Sight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-In Sight/Pods-In Sight.debug.xcconfig"; sourceTree = "<group>"; };
 		95195A74D26C006CC6B585AE /* Pods_In_Sight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_In_Sight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 		831A212921DE556D00E8822D /* In Sight */ = {
 			isa = PBXGroup;
 			children = (
+				83780CE221E9ECCB00B65AEE /* Structures */,
 				831B0E8D21E107E4006B4C32 /* Enumerators */,
 				831B0E8921E1070D006B4C32 /* Helpers */,
 				831A214221DE55C300E8822D /* Models */,
@@ -373,6 +376,14 @@
 			path = Saved;
 			sourceTree = "<group>";
 		};
+		83780CE221E9ECCB00B65AEE /* Structures */ = {
+			isa = PBXGroup;
+			children = (
+				83780CE321E9ECDC00B65AEE /* ApiPaths.swift */,
+			);
+			path = Structures;
+			sourceTree = "<group>";
+		};
 		90AF4170E280FB686492E9E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -532,6 +543,7 @@
 				831B0E7E21E0F6F0006B4C32 /* PhotoGridLayout.swift in Sources */,
 				831A215121DF554100E8822D /* ImageCell.swift in Sources */,
 				831B0E9B21E23ADF006B4C32 /* Dictionary+Operators.swift in Sources */,
+				83780CE421E9ECDC00B65AEE /* ApiPaths.swift in Sources */,
 				831B0E9421E23846006B4C32 /* RequestBaseDefault.swift in Sources */,
 				8331337621E584D100DE9F36 /* UnsplashPhotoSearchRequest.swift in Sources */,
 				8331337421E584C200DE9F36 /* UnsplashPhotoSearchOptions.swift in Sources */,

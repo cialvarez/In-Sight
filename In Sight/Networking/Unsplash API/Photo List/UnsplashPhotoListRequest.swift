@@ -11,7 +11,7 @@ import Foundation
 class UnsplashPhotoListRequest: UnsplashRequestBaseDefault {
     var options: UnsplashPhotoListOptions
     override var urlPath: String? {
-        return "photos"
+        return ApiPaths.PhotoList.basePath
     }
     override var queryParameters: [String: String] {
         return super.queryParameters + options.queryParameters
