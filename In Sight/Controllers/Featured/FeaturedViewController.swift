@@ -9,13 +9,11 @@
 import UIKit
 
 class FeaturedViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         loadPhotoGallery()
     }
-    
     func loadPhotoGallery() {
         let galleryVC = GalleryViewController.generateFromStoryboard()
         galleryVC.view.autoresizingMask = [.flexibleWidth,
@@ -25,15 +23,4 @@ class FeaturedViewController: UIViewController {
         view.addSubview(galleryVC.view)
         galleryVC.didMove(toParent: self)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

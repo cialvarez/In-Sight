@@ -9,9 +9,7 @@
 import Foundation
 
 extension Dictionary {
-    
     static func + (left: Dictionary, right: Dictionary) -> Dictionary {
-        
         var map = Dictionary()
         for (key, val) in left {
             map[key] = val
@@ -21,5 +19,4 @@ extension Dictionary {
         }
         return map
     }
-    
 }

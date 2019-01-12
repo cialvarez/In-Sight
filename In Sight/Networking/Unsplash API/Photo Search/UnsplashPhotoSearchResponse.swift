@@ -11,14 +11,11 @@ import Foundation
 import ObjectMapper
 
 struct UnsplashPhotoSearchResponse: Mappable {
-    
     var results = [UnsplashPhotoList]()
     var total = 0
-    
     init?(map: Map) {
         mapping(map: map)
     }
-    
     mutating func mapping(map: Map) {
         results <- map["results"]
         total <- map["total"]

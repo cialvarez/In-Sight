@@ -18,7 +18,6 @@ struct UnsplashPhotoListOptions {
 extension UnsplashPhotoListOptions: RequestParameterBase {
     var queryParameters: [String: String] {
         var parameters = [String: String]()
-        
         parameters["page"] = "\(page)"
         parameters["per_page"] = "\(perPage)"
         parameters["order_by"] = orderBy.rawValue

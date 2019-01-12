@@ -10,15 +10,12 @@ import Foundation
 import Alamofire
 
 class RequestBaseDefault: RequestBase {
-    
     var httpProtocol: HttpProtocol {
         return .https
     }
-    
     var httpMethod: HTTPMethod {
         return .get
     }
-    
     var urlDomain: URLDomain? {
         #if DEBUG
         return .debug
@@ -26,35 +23,26 @@ class RequestBaseDefault: RequestBase {
         return .release
         #endif
     }
-    
     var urlPath: String? {
         return nil
     }
-    
     var url: String {
         var url = "/"
-        
         if let urlPath = urlPath {
             url += urlPath
         }
-        
         return url
     }
-    
     var cachePolicy: URLRequest.CachePolicy {
         return .useProtocolCachePolicy
     }
-    
     var queryParameters: [String: String] {
         return [String: String]()
     }
-    
     var bodyParameters: [String: Any] {
         return [String: Any]()
     }
-    
     var customHeaders: [String: String] {
         return [String: String]()
     }
 }
-

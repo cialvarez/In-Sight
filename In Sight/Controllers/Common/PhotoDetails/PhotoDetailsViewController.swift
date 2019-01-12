@@ -10,33 +10,25 @@ import UIKit
 import Kingfisher
 
 class PhotoDetailsViewController: UIViewController {
-
     var photo: UnsplashPhotoList?
-    
     var photoToSave: Saved?
-    
     @IBOutlet weak var saveButton: UIButton!
-    
     @IBOutlet weak var authorLabel: UILabel!
-    
     @IBOutlet weak var photoImageView: UIImageView! {
         didSet {
             photoImageView.kf.indicatorType = .activity
             (photoImageView.kf.indicator?.view as? UIActivityIndicatorView)?.color = .white
         }
     }
-    
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         guard let photoToSave = photoToSave else {
             return
         }
-        
         if photoToSave.isSaved {
             photoToSave.remove()
         } else {
             photoToSave.add()
         }
-        
         updateSaveButton()
     }
     override func viewDidLoad() {
@@ -52,7 +44,6 @@ class PhotoDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         updateSaveButton()
     }
-    
     private func updateSaveButton() {
         guard let photoToSave = photoToSave else {
             return
@@ -68,7 +59,8 @@ class PhotoDetailsViewController: UIViewController {
 
 extension PhotoDetailsViewController {
     static func generateFromStoryboard(photo: UnsplashPhotoList) -> UIViewController {
-        guard let photoDetailsVC = R.storyboard.photoDetails().instantiateInitialViewController() as? PhotoDetailsViewController else {
+        guard let photoDetailsVC =
+            R.storyboard.photoDetails().instantiateInitialViewController() as? PhotoDetailsViewController else {
             return UIViewController()
         }
         photoDetailsVC.photo = photo

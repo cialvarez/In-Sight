@@ -14,11 +14,9 @@ protocol RequestParameterBase {
 }
 
 extension RequestParameterBase {
-    
     var queryParameters: [String: String] {
         return [String: String]()
     }
-    
     var bodyParameters: [String: Any] {
         return [String: String]()
     }

@@ -9,15 +9,11 @@
 import UIKit
 
 class FavoritesViewController: UIViewController {
-    
     let galleryVC = GalleryViewController.generateFromStoryboard(galleryType: .favorites)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loadPhotoGallery()
     }
-    
     func loadPhotoGallery() {
         galleryVC.view.autoresizingMask = [.flexibleWidth,
                                            .flexibleHeight]
@@ -26,15 +22,4 @@ class FavoritesViewController: UIViewController {
         view.addSubview(galleryVC.view)
         galleryVC.didMove(toParent: self)
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

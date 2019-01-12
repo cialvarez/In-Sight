@@ -12,7 +12,6 @@ struct UnsplashPhotoSearchOptions {
     var page = 1
     var perPage = 20
     var query = ""
-    
     init(query: String) {
         self.query = query
     }
@@ -22,11 +21,9 @@ struct UnsplashPhotoSearchOptions {
 extension UnsplashPhotoSearchOptions: RequestParameterBase {
     var queryParameters: [String: String] {
         var parameters = [String: String]()
-        
         parameters["page"] = "\(page)"
         parameters["per_page"] = "\(perPage)"
         parameters["query"] = query
-        
         return parameters
     }
 }

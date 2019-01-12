@@ -10,7 +10,6 @@ import Foundation
 import ObjectMapper
 
 struct UnsplashPhotoList: Mappable {
-    
     var urls: UnsplashPhotoUrls?
     var authorInfo: UnsplashAuthorInfo?
     var width = CGFloat(0)
@@ -18,11 +17,10 @@ struct UnsplashPhotoList: Mappable {
     var description = ""
     var likes = 0
     var imageId = ""
-    
     init?(map: Map) {
         mapping(map: map)
     }
-    
+
     mutating func mapping(map: Map) {
         urls <- map["urls"]
         authorInfo <- map["user"]
@@ -32,5 +30,4 @@ struct UnsplashPhotoList: Mappable {
         likes <- map["likes"]
         imageId <- map["id"]
     }
-    
 }

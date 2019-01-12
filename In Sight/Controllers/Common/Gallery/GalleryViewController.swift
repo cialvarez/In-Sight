@@ -18,9 +18,7 @@ enum GalleryType {
 }
 
 class GalleryViewController: UIViewController {
-    
     @IBOutlet weak var collectionView: UICollectionView!
-    
     var photoListOptions: UnsplashPhotoListOptions?
     var photoSearchOptions: UnsplashPhotoSearchOptions?
     var photoSearchResultCount = 0
@@ -28,9 +26,7 @@ class GalleryViewController: UIViewController {
     var isLoadingPhotos = false
     let searchController = UISearchController(searchResultsController: nil)
     var galleryType = GalleryType.featured
-    
     let refresher = UIRefreshControl()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let layout = collectionView.collectionViewLayout as? PhotoGridLayout {
@@ -39,7 +35,6 @@ class GalleryViewController: UIViewController {
         // Register cell classes
         self.collectionView.register(UINib(resource: R.nib.imageCell),
                                      forCellWithReuseIdentifier: reuseIdentifier)
-        
         // Setup the Search Controller
         if galleryType == .featured {
             searchController.obscuresBackgroundDuringPresentation = false
@@ -49,19 +44,16 @@ class GalleryViewController: UIViewController {
             searchController.searchBar.enablesReturnKeyAutomatically = false
             searchController.searchBar.delegate = self
         }
-      
         // Setup refresh view
         collectionView.alwaysBounceVertical = true
         refresher.addTarget(self, action: #selector(refreshList), for: .valueChanged)
         collectionView.addSubview(refresher)
-        
         // Load photo list
         if galleryType == .featured {
             photoListOptions = UnsplashPhotoListOptions()
             loadPhotoList(shouldReset: true)
         }
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if galleryType == .favorites {
@@ -69,7 +61,6 @@ class GalleryViewController: UIViewController {
         }
         collectionView.reloadData()
     }
-    
     func clearPhotos() {
         photos =  [UnsplashPhotoList]()
         collectionView.reloadData()
@@ -77,7 +68,6 @@ class GalleryViewController: UIViewController {
         photoListOptions?.page = 1
         photoSearchOptions?.page = 1
     }
-    
     @objc private func refreshList() {
         isLoadingPhotos = false
         loadPhotoList(shouldReset: true)
@@ -89,14 +79,12 @@ class GalleryViewController: UIViewController {
 
 extension GalleryViewController: PhotoGridLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView,
-                        heightForPhotoAtIndexPath indexPath:IndexPath) -> CGFloat {
+                        heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
         guard photos.count > indexPath.row else {
             return 0
         }
-        
         let currentPhoto = photos[indexPath.row]
         let cellWidth = (collectionView.bounds.width / 2) - 20
-        
         return (currentPhoto.height / currentPhoto.width) * cellWidth
     }
 }
@@ -104,12 +92,10 @@ extension GalleryViewController: PhotoGridLayoutDelegate {
 // MARK: Network Requests
 
 extension GalleryViewController {
-    
     func loadPhotoList(shouldReset: Bool = false) {
         guard !isLoadingPhotos else {
             return
         }
-        
         if var options = photoSearchOptions { // For keyword searches, call photo search API
             guard shouldReset ||
                 photoSearchResultCount > photos.count else {
@@ -154,13 +140,11 @@ extension GalleryViewController {
                 self?.collectionView.collectionViewLayout.invalidateLayout()
         }
     }
-    
     func callPhotoListAPI(options: UnsplashPhotoListOptions) {
         let isNewList = options.page == 1
         if isNewList {
             clearPhotos()
         }
-        
         isLoadingPhotos = true
         Alamofire.request(UnsplashPhotoListRequest(options: options))
             .responseArray { [weak self] (response: DataResponse<[UnsplashPhotoList]>) in
@@ -180,7 +164,6 @@ extension GalleryViewController {
 // MARK: - UISearchBar Delegate
 
 extension GalleryViewController: UISearchBarDelegate {
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isLoadingPhotos = false
         photoSearchOptions = nil
@@ -188,7 +171,6 @@ extension GalleryViewController: UISearchBarDelegate {
             photoListOptions = UnsplashPhotoListOptions()
         }
     }
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         isLoadingPhotos = false
         if let searchQuery = searchBar.text,
@@ -199,22 +181,18 @@ extension GalleryViewController: UISearchBarDelegate {
             photoListOptions = UnsplashPhotoListOptions()
             photoSearchOptions = nil
         }
-        
         loadPhotoList(shouldReset: true)
     }
 }
 
 extension GalleryViewController {
-    
     static func generateFromStoryboard(galleryType: GalleryType = .featured) -> UIViewController {
         guard let navigationVC = R.storyboard.gallery().instantiateInitialViewController() as? UINavigationController,
             let galleryVC = navigationVC.visibleViewController as? GalleryViewController else {
                 assertionFailure()
                 return UINavigationController(rootViewController: UIViewController())
         }
-        
         galleryVC.galleryType = galleryType
-        
         return navigationVC
     }
 }

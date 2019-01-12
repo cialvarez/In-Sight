@@ -23,4 +23,3 @@ enum URLDomain {
     case customDebug(URLDomainProtocol)
     case customRelease(URLDomainProtocol)
 }
-

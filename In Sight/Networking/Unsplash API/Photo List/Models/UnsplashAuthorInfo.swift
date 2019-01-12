@@ -9,17 +9,11 @@
 import Foundation
 import ObjectMapper
 struct UnsplashAuthorInfo: Mappable {
-    
     var name = ""
-    
     init?(map: Map) {
         mapping(map: map)
     }
-    
     mutating func mapping(map: Map) {
        name <- map["name"]
     }
-    
-    
 }
-

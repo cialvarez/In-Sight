@@ -17,20 +17,7 @@ class ImageCell: UICollectionViewCell {
             (photoImageView.kf.indicator?.view as? UIActivityIndicatorView)?.color = .white
         }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     func loadImage(with url: URL?) {
         photoImageView.image(with: url)
     }
-    
-
-//    func size() -> CGSize {
-//        return CGSize(width: UIScreen.main.bounds.size.width / 2 - 15,
-//                      height: CGFloat(Int.random(in: 50...250)))
-//    }
-
 }

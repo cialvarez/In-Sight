@@ -9,20 +9,15 @@
 import Foundation
 import ObjectMapper
 struct UnsplashPhotoUrls: Mappable {
-    
     var full: URL?
     var regular: URL?
     var thumb: URL?
-    
     init?(map: Map) {
         mapping(map: map)
     }
-    
     mutating func mapping(map: Map) {
         full <- (map["full"], URLTransform())
         regular <- (map["regular"], URLTransform())
         thumb <- (map["thumb"], URLTransform())
     }
-    
-    
 }

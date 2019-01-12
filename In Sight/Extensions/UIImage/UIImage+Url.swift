@@ -12,13 +12,12 @@ import Kingfisher
 extension UIImageView {
     func image(with url: URL?,
                defaultImage: UIImage? = nil) {
-        
         self.kf.setImage(with: url) { result in
             switch result {
             case .success(let value):
                 UIView.transition(with: self,
                                   duration: 0.3,
-                                  options: .transitionCrossDissolve, 
+                                  options: .transitionCrossDissolve,
                                   animations: {
                                     self.image = value.image
                 }, completion: nil)
