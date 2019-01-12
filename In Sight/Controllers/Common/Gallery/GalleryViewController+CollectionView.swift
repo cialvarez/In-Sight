@@ -28,12 +28,7 @@ extension GalleryViewController: UICollectionViewDelegate {
             return
         }
         if indexPath.row == photos.count - 2 {
-            photoSearchOptions?.page += 1
-            photoListOptions?.page += 1
-            callPhotoListAPI()
-            if photoSearchResultCount > photos.count {
-                callPhotoSearchAPI()
-            }
+            loadPhotoList(shouldReset: false)
         }
     }
     

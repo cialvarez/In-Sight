@@ -20,6 +20,7 @@ enum GalleryType {
 class GalleryViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
     var photoListOptions: UnsplashPhotoListOptions?
     var photoSearchOptions: UnsplashPhotoSearchOptions?
     var photoSearchResultCount = 0
@@ -27,6 +28,8 @@ class GalleryViewController: UIViewController {
     var isLoadingPhotos = false
     let searchController = UISearchController(searchResultsController: nil)
     var galleryType = GalleryType.featured
+    
+    let refresher = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,17 +41,24 @@ class GalleryViewController: UIViewController {
                                      forCellWithReuseIdentifier: reuseIdentifier)
         
         // Setup the Search Controller
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Find Photos"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
+        if galleryType == .featured {
+            searchController.obscuresBackgroundDuringPresentation = false
+            searchController.searchBar.placeholder = "Find Photos"
+            navigationItem.searchController = searchController
+            definesPresentationContext = true
+            searchController.searchBar.enablesReturnKeyAutomatically = false
+            searchController.searchBar.delegate = self
+        }
+      
+        // Setup refresh view
+        collectionView.alwaysBounceVertical = true
+        refresher.addTarget(self, action: #selector(refreshList), for: .valueChanged)
+        collectionView.addSubview(refresher)
         
-        // Setup the Scope Bar
-        searchController.searchBar.delegate = self
-
+        // Load photo list
         if galleryType == .featured {
             photoListOptions = UnsplashPhotoListOptions()
-            callPhotoListAPI()
+            loadPhotoList(shouldReset: true)
         }
     }
     
@@ -64,6 +74,14 @@ class GalleryViewController: UIViewController {
         photos =  [UnsplashPhotoList]()
         collectionView.reloadData()
         collectionView.collectionViewLayout.invalidateLayout()
+        photoListOptions?.page = 1
+        photoSearchOptions?.page = 1
+    }
+    
+    @objc private func refreshList() {
+        isLoadingPhotos = false
+        loadPhotoList(shouldReset: true)
+        refresher.endRefreshing()
     }
 }
 
@@ -86,18 +104,43 @@ extension GalleryViewController: PhotoGridLayoutDelegate {
 // MARK: Network Requests
 
 extension GalleryViewController {
-
-    func callPhotoSearchAPI() {
-        guard let photoSearchOptions = photoSearchOptions,
-            !isLoadingPhotos else {
-                return
+    
+    func loadPhotoList(shouldReset: Bool = false) {
+        guard !isLoadingPhotos else {
+            return
         }
-        let isNewList = photoSearchOptions.page == 1
+        
+        if var options = photoSearchOptions { // For keyword searches, call photo search API
+            guard shouldReset ||
+                photoSearchResultCount > photos.count else {
+                return
+            }
+
+            if shouldReset {
+                options.page = 1
+            } else {
+                options.page += 1
+            }
+            callPhotoSearchAPI(options: options)
+        } else if var options = photoListOptions { // For popular photo searches, call photo list API
+            if shouldReset {
+                options.page = 1
+            } else {
+                options.page += 1
+            }
+            callPhotoListAPI(options: options)
+        } else { // For favorites
+            collectionView.reloadData()
+        }
+    }
+
+    func callPhotoSearchAPI(options: UnsplashPhotoSearchOptions) {
+        let isNewList = options.page == 1
         if isNewList {
             clearPhotos()
         }
         isLoadingPhotos = true
-        Alamofire.request(UnsplashPhotoSearchRequest(options: photoSearchOptions))
+        Alamofire.request(UnsplashPhotoSearchRequest(options: options))
             .responseObject { [weak self] (response: DataResponse<UnsplashPhotoSearchResponse>) in
                 switch response.result {
                 case .success(let response):
@@ -112,23 +155,14 @@ extension GalleryViewController {
         }
     }
     
-    func callPhotoListAPI() {
-        guard galleryType == .featured else {
-            collectionView.reloadData()
-            return
-        }
-        
-        guard let photoListOptions = photoListOptions,
-            !isLoadingPhotos else {
-            return
-        }
-        let isNewList = photoListOptions.page == 1
+    func callPhotoListAPI(options: UnsplashPhotoListOptions) {
+        let isNewList = options.page == 1
         if isNewList {
             clearPhotos()
         }
         
         isLoadingPhotos = true
-        Alamofire.request(UnsplashPhotoListRequest(options: photoListOptions))
+        Alamofire.request(UnsplashPhotoListRequest(options: options))
             .responseArray { [weak self] (response: DataResponse<[UnsplashPhotoList]>) in
                 switch response.result {
                 case .success(let photoList):
@@ -148,20 +182,25 @@ extension GalleryViewController {
 extension GalleryViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isLoadingPhotos = false
         photoSearchOptions = nil
         if photoListOptions == nil {
             photoListOptions = UnsplashPhotoListOptions()
         }
-        callPhotoListAPI()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        photoListOptions = nil
-        if photoSearchOptions == nil {
-            photoSearchOptions = UnsplashPhotoSearchOptions(query: searchBar.text ?? "")
+        isLoadingPhotos = false
+        if let searchQuery = searchBar.text,
+            searchQuery != "" {
+            photoListOptions = nil
+            photoSearchOptions = UnsplashPhotoSearchOptions(query: searchQuery)
+        } else {
+            photoListOptions = UnsplashPhotoListOptions()
+            photoSearchOptions = nil
         }
-        photoSearchOptions?.page = 1
-        callPhotoSearchAPI()
+        
+        loadPhotoList(shouldReset: true)
     }
 }
 

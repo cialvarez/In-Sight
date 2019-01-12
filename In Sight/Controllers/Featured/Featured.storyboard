@@ -17,7 +17,6 @@
                     <view key="view" contentMode="scaleToFill" id="IdH-gU-oEI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.96846463184819165" green="1" blue="0.22527024554156261" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="LCc-W7-u0Z"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Browse" image="app_search_24" id="yn5-0u-LsQ"/>
