@@ -7,31 +7,27 @@
 //
 
 import Foundation
-import ObjectMapper
 
 private let savedImagesKey = "SavedImages"
 
-class Saved: Mappable {
+struct Saved: Codable {
     private static var savedItems = [Saved]()
-    private var imageId = ""
+    private var id = ""
     private(set) var photo: UnsplashPhotoList?
     var isSaved: Bool {
-        return Saved.filterBy(imageId: imageId) != nil
+        return Saved.filterBy(imageId: id) != nil
     }
-    required init?(map: Map) {}
+    
     init(photo: UnsplashPhotoList) {
-        self.imageId = photo.imageId
+        self.id = photo.id
         self.photo = photo
     }
-    func mapping(map: Map) {
-        imageId <- map["id"]
-        photo <- map["photo"]
-    }
+    
     func add() {
          Saved.add(saved: self)
     }
     func remove() {
-         Saved.remove(imageId: self.imageId)
+         Saved.remove(imageId: self.id)
     }
 }
 
@@ -40,9 +36,12 @@ extension Saved {
         savedItems.removeAll()
         if let savedDics = UserDefaults.standard.array(forKey: savedImagesKey) {
             savedDics.forEach {
-                if let dic = $0 as? [String: Any],
-                    let saved = Mapper<Saved>().map(JSON: dic) {
-                    savedItems.append(saved)
+                let decoder = JSONDecoder()
+//                decoder
+                if let dic = $0 as? [String: Any] {
+                    
+//                    let saved = Mapper<Saved>().map(JSON: dic) {
+//                    savedItems.append(saved)
                 }
             }
         }
@@ -50,7 +49,7 @@ extension Saved {
     }
     static func filterBy(imageId: String) -> Saved? {
         let results = allStoredData().filter {
-            return $0.imageId == imageId
+            return $0.id == imageId
         }
         return results.first
     }
@@ -61,7 +60,7 @@ extension Saved {
     fileprivate static func remove(imageId: String) {
         if let result = filterBy(imageId: imageId) {
             if let index = savedItems.index(where: {
-                return $0.imageId == result.imageId
+                return $0.id == result.id
             }) {
                 savedItems.remove(at: index)
             }
@@ -70,9 +69,12 @@ extension Saved {
     }
     private static func save() {
         var dataToSave = [[String: Any]]()
-        savedItems.forEach {
-            dataToSave.append($0.toJSON())
+        let jsonDecoder = JSONDecoder()
+        for savedItem in savedItems {
+            
+//            dataToSave.append($0.toJSON())
         }
+
         UserDefaults.standard.set(dataToSave, forKey: savedImagesKey)
         UserDefaults.standard.synchronize()
     }

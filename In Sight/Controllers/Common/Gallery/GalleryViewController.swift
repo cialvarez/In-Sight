@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import Alamofire
-import AlamofireObjectMapper
+import Moya
 
 let reuseIdentifier = R.reuseIdentifier.imageCell.identifier
 
@@ -19,6 +18,7 @@ enum GalleryType {
 
 class GalleryViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
+    let provider = MoyaProvider<UnsplashAPI>(plugins: [NetworkLoggerPlugin()])
     var photoListOptions: UnsplashPhotoListOptions?
     var photoSearchOptions: UnsplashPhotoSearchOptions?
     var photoSearchResultCount = 0
@@ -121,18 +121,19 @@ extension GalleryViewController {
             clearPhotos()
         }
         isLoadingPhotos = true
-        Alamofire.request(UnsplashPhotoSearchRequest(options: options))
-            .responseObject { [weak self] (response: DataResponse<UnsplashPhotoSearchResponse>) in
-                switch response.result {
-                case .success(let response):
-                    self?.photos += response.results
-                    self?.photoSearchResultCount = response.total
-                case .failure(let error):
-                    print(error)
+        provider.request(.photoSearch(options: options)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                if let photoSearchResult = try? response.map(UnsplashPhotoSearchResponse.self) {
+                    self?.photos += photoSearchResult.results
+                    self?.photoSearchResultCount = photoSearchResult.total
                 }
-                self?.isLoadingPhotos = false
-                self?.collectionView.reloadData()
-                self?.collectionView.collectionViewLayout.invalidateLayout()
+            case .failure(let error):
+                 print(error)
+            }
+            self?.isLoadingPhotos = false
+                 self?.collectionView.reloadData()
+                 self?.collectionView.collectionViewLayout.invalidateLayout()
         }
     }
     func callPhotoListAPI(options: UnsplashPhotoListOptions) {
@@ -141,17 +142,21 @@ extension GalleryViewController {
             clearPhotos()
         }
         isLoadingPhotos = true
-        Alamofire.request(UnsplashPhotoListRequest(options: options))
-            .responseArray { [weak self] (response: DataResponse<[UnsplashPhotoList]>) in
-                switch response.result {
-                case .success(let photoList):
-                    self?.photos += photoList
-                case .failure(let error):
-                    print(error)
+        provider.request(.photoList(options: options)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                   let photoListResult = try response.map([UnsplashPhotoList].self)
+                    self?.photos += photoListResult
+                } catch let error {
+                    print("❌ \(error)")
                 }
-                self?.isLoadingPhotos = false
-                self?.collectionView.reloadData()
-                self?.collectionView.collectionViewLayout.invalidateLayout()
+            case .failure(let error):
+                print(error)
+            }
+            self?.isLoadingPhotos = false
+            self?.collectionView.reloadData()
+            self?.collectionView.collectionViewLayout.invalidateLayout()
         }
     }
 }

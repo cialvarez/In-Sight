@@ -61,7 +61,7 @@ class PhotoDetailsViewController: UIViewController {
             return
         }
         photoImageView.image(with: photo.urls?.regular)
-        authorLabel.text = photo.authorInfo?.name ?? ""
+        authorLabel.text = photo.user?.name ?? ""
         photoToSave = Saved(photo: photo)
     }
     override func viewWillAppear(_ animated: Bool) {

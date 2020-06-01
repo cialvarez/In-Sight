@@ -1,45 +1,44 @@
 PODS:
-  - Alamofire (4.8.0)
-  - AlamofireObjectMapper (5.2.0):
-    - Alamofire (~> 4.7)
-    - ObjectMapper (~> 3.4)
-  - Kingfisher (5.0.1)
-  - ObjectMapper (3.4.2)
-  - R.swift (5.0.0):
-    - R.swift.Library (~> 5.0.0)
-  - R.swift.Library (5.0.0)
-  - SwiftDate (5.0.13)
-  - SwiftLint (0.29.2)
+  - Alamofire (5.2.1)
+  - Kingfisher (5.14.0):
+    - Kingfisher/Core (= 5.14.0)
+  - Kingfisher/Core (5.14.0)
+  - Moya (14.0.0):
+    - Moya/Core (= 14.0.0)
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
+  - R.swift (5.2.2):
+    - R.swift.Library (~> 5.2.0)
+  - R.swift.Library (5.2.0)
+  - SwiftDate (6.1.0)
+  - SwiftLint (0.39.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.7)
-  - AlamofireObjectMapper (~> 5.2)
-  - Kingfisher (~> 5.0)
+  - Kingfisher
+  - Moya (~> 14.0)
   - R.swift
   - SwiftDate
   - SwiftLint
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
-    - AlamofireObjectMapper
     - Kingfisher
-    - ObjectMapper
+    - Moya
     - R.swift
     - R.swift.Library
     - SwiftDate
     - SwiftLint
 
 SPEC CHECKSUMS:
-  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
-  AlamofireObjectMapper: 92b6ce2423a9d159e686f6a1d514a009bf903ddc
-  Kingfisher: 4f771421b9208185217550528a06fd48756cb7c2
-  ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
-  R.swift: f88c7d7d48a2be4dffa132dde1b3d389620310eb
-  R.swift.Library: 0bf390e729bc10bb2c9e4fb78bd043164a7be4ff
-  SwiftDate: f4aea5fa9dee812485f34041121a4cbde01b0dee
-  SwiftLint: 47df60bdea6e7e902b193b6596db8683aafd86a3
+  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
+  Kingfisher: 7b64389a43139c903ec434788344c288217c792d
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  R.swift: 7c52cdc57a66840ffe6cbd8a823d732059d42a32
+  R.swift.Library: 5ba4f1631300caf9a4d890186930da85d540769d
+  SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
+  SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
 
-PODFILE CHECKSUM: e9b322444b28c0faca41d9344525308c15d41bc2
+PODFILE CHECKSUM: 3d3d80a8827b8ed8e05074ad54c0eff64698d508
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.9.2

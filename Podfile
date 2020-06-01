@@ -6,10 +6,9 @@ target 'In Sight' do
   use_frameworks!
 
   # Pods for In Sight
-  pod 'Alamofire', '~> 4.7'
   pod 'R.swift'
   pod 'SwiftLint'
-  pod 'AlamofireObjectMapper', '~> 5.2'
-  pod 'Kingfisher', '~> 5.0'
+  pod 'Kingfisher'
   pod 'SwiftDate'
+  pod 'Moya', '~> 14.0'
 end

@@ -19,10 +19,10 @@ struct UnsplashPhotoSearchOptions {
 
 // MARK: Request Parameter Base
 extension UnsplashPhotoSearchOptions: RequestParameterBase {
-    var queryParameters: [String: String] {
-        var parameters = [String: String]()
-        parameters["page"] = "\(page)"
-        parameters["per_page"] = "\(perPage)"
+    var queryParameters: [String: Any] {
+        var parameters = [String: Any]()
+        parameters["page"] = page
+        parameters["per_page"] = perPage
         parameters["query"] = query
         return parameters
     }
